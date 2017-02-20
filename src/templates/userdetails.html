@@ -1,0 +1,25 @@
+<div>
+    <p>Name: {{user.name}}</p>
+    <p ng-if="user.location">Location {{user.location}}</p>
+    <img ng-src="{{user.avatar_url}}" title="{{user.name}} from {{user.location}}" class="img-circle user-image"/>
+    <div>
+        <input type="search" placeholder="Search repos" ng-model="searchRepos.name" class="form-control">
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th ng-click="changeSortOrder('+name')">Name</th>
+        <th ng-click="changeSortOrder('-stargazers_count')">Stars</th>
+        <th ng-click="changeSortOrder('+language')">Language</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="repo in repos | filter:searchRepos | orderBy:sortOrder">
+        <td>{{repo.name}}</td>
+        <td>{{repo.stargazers_count | number}}</td>
+        <td>{{repo.language}}</td>
+    </tr>
+    </tbody>
+</table>
